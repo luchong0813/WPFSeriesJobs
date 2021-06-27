@@ -1,0 +1,43 @@
+﻿<Window
+    x:Class="_2_WPFStyle.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:_2_WPFStyle"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <!--  功能：WPF样式基础  -->
+    <!--  时间：2021-06-27  -->
+    <!--  作者：luchong  -->
+    <!--  blog：https://www.cnblogs.com/chonglu/  -->
+    <Window.Resources>
+        <Style x:Key="LableDefauleStyle" TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="#54B458" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Content" Value="标签" />
+        </Style>
+
+        <Style
+            x:Key="LableMaxStyle"
+            BasedOn="{StaticResource LableDefauleStyle}"
+            TargetType="{x:Type Label}">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <Label Background="#54B458" Style="{StaticResource LableDefauleStyle}" />
+            <Label Background="#00BED6" Style="{StaticResource LableMaxStyle}" />
+            <Label Background="#5479F5" />
+            <Label Background="#FF9400" Style="{StaticResource LableMaxStyle}" />
+            <Label Background="#FF4DA0" />
+        </StackPanel>
+    </Grid>
+</Window>
