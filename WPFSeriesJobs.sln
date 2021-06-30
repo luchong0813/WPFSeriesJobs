@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-ControlTemplete", "3-Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-WPFDataTemplete", "4-WPFDataTemplete\4-WPFDataTemplete.csproj", "{EF2C0C06-571F-4737-818B-08FC596DFE51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1-4-WPF-UI", "WPF-UI\1-4-WPF-UI.csproj", "{99B229FB-C678-4627-8D7A-767389F5F24A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EF2C0C06-571F-4737-818B-08FC596DFE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF2C0C06-571F-4737-818B-08FC596DFE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF2C0C06-571F-4737-818B-08FC596DFE51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B229FB-C678-4627-8D7A-767389F5F24A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B229FB-C678-4627-8D7A-767389F5F24A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B229FB-C678-4627-8D7A-767389F5F24A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B229FB-C678-4627-8D7A-767389F5F24A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
