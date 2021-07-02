@@ -73,6 +73,8 @@
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
                                 <Setter TargetName="next" Property="Visibility" Value="Hidden" />
+                                <!--Tips:当ListBoxItem项未被选中时，也需要设置背景颜色（一般设置透明色），否则就会出现不点击到内容就不触发IsSelected的问题-->
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
