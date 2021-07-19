@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1-WPFLayput", "1-WPFLayput\1-WPFLayput.csproj", "{5D77E29B-C23F-494E-9671-51F5294FA65E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.1WPFLayput", "1.1WPFLayput\1.1WPFLayput.csproj", "{5D77E29B-C23F-494E-9671-51F5294FA65E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2-WPFStyle", "2-WPFStyle\2-WPFStyle.csproj", "{2EB39D31-6B08-49F0-9480-24C2AD8D913C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.2-WPFStyle", "1.2WPFStyle\1.2-WPFStyle.csproj", "{2EB39D31-6B08-49F0-9480-24C2AD8D913C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-ControlTemplete", "3-ControlTemplete\3-ControlTemplete.csproj", "{057D239F-9186-48C9-8930-FEB257D558A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.2ControlTemplete", "1.3ControlTemplete\1.2ControlTemplete.csproj", "{057D239F-9186-48C9-8930-FEB257D558A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-WPFDataTemplete", "4-WPFDataTemplete\4-WPFDataTemplete.csproj", "{EF2C0C06-571F-4737-818B-08FC596DFE51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.4WPFDataTemplete", "1.4WPFDataTemplete\1.4WPFDataTemplete.csproj", "{EF2C0C06-571F-4737-818B-08FC596DFE51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1-4-WPF-UI", "WPF-UI\1-4-WPF-UI.csproj", "{99B229FB-C678-4627-8D7A-767389F5F24A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.5-WPF-UI", "1.5WPF-UI\1.5-WPF-UI.csproj", "{99B229FB-C678-4627-8D7A-767389F5F24A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2WPF-MVVM", "2WPF-MVVM\2WPF-MVVM.csproj", "{28E2CB00-3EFD-43AD-B243-37FBDC9245A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{99B229FB-C678-4627-8D7A-767389F5F24A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99B229FB-C678-4627-8D7A-767389F5F24A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99B229FB-C678-4627-8D7A-767389F5F24A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E2CB00-3EFD-43AD-B243-37FBDC9245A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E2CB00-3EFD-43AD-B243-37FBDC9245A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E2CB00-3EFD-43AD-B243-37FBDC9245A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E2CB00-3EFD-43AD-B243-37FBDC9245A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
