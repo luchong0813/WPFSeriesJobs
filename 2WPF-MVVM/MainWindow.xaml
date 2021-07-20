@@ -17,7 +17,7 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Focusable" Value="False" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontSize" Value="13" />
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="Padding" Value="10" />
             <Style.Triggers>
@@ -44,6 +44,32 @@
         <Style x:Key="listBoxItemStyle" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
                 <Setter.Value>
+                    <!--<DataTemplate>
+                        <Border Name="border" Padding="0,10">
+                            <UniformGrid Columns="4">
+                                <Border
+                                    Width="50"
+                                    Height="50"
+                                    CornerRadius="25">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="./Images/logo.png" />
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock
+                                    Name="nick"
+                                    VerticalAlignment="Center"
+                                    Text="傲慢与偏见" />
+                                <TextBlock
+                                    Name="timeText"
+                                    VerticalAlignment="Center"
+                                    Text="07：10" />
+                                <TextBlock
+                                    Name="next"
+                                    VerticalAlignment="Center"
+                                    Text="→" />
+                            </UniformGrid>
+                        </Border>
+                    </DataTemplate>-->
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
                         <Border Name="border" Padding="0,10">
                             <UniformGrid Columns="4">
@@ -88,6 +114,13 @@
             </Setter>
         </Style>
 
+        <Style x:Key="LinkBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid>
@@ -111,7 +144,14 @@
                     <ItemsControl ItemsSource="{Binding MenuItems}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource buttonDefaultStyle}">
+                                <!--
+                                    Tips:在某些列表控件中绑定了某个集合数据源时，再绑定上下文的某个命令时，会找不到，
+                                    可以通过FindAncestor去查找父级或Window的上下文去绑定命令
+                                -->
+                                <Button
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.MenuItemCmd}"
+                                    CommandParameter="{Binding Name}"
+                                    Style="{StaticResource buttonDefaultStyle}">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Style="{StaticResource btnIconStyle}" Text="{Binding Icon}" />
                                         <TextBlock Text="{Binding Name}" />
@@ -129,35 +169,6 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
-
-
-                    <!--<Button Style="{StaticResource buttonDefaultStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource btnIconStyle}" Text="&#xe613;" />
-                            <TextBlock Text="财务" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Style="{StaticResource buttonDefaultStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource btnIconStyle}" Text="&#xe62b;" />
-                            <TextBlock Text="积分" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Style="{StaticResource buttonDefaultStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource btnIconStyle}" Text="&#xe636;" />
-                            <TextBlock Text="市场" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Style="{StaticResource buttonDefaultStyle}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource btnIconStyle}" Text="&#xe69a;" />
-                            <TextBlock Text="客服" />
-                        </StackPanel>
-                    </Button>-->
 
                     <StackPanel Margin="10,0" Orientation="Horizontal">
                         <Border
@@ -213,7 +224,7 @@
                                                 Grid.Row="1"
                                                 FontSize="26"
                                                 Foreground="White"
-                                                Text="{Binding Integral}" />
+                                                Text="{Binding Integral, StringFormat={}{0:N0}}" />
                                             <StackPanel Grid.Row="1" HorizontalAlignment="Right">
                                                 <TextBlock
                                                     HorizontalAlignment="Right"
@@ -223,7 +234,7 @@
                                                 <TextBlock
                                                     Foreground="White"
                                                     Opacity="0.7"
-                                                    Text="{Binding Yield, StringFormat={}{P1}}" />
+                                                    Text="{Binding Yield}" />
                                             </StackPanel>
 
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
@@ -240,170 +251,10 @@
 
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal" />
+                                    <UniformGrid Columns="5" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
-
-
-                        <!--<Border Margin="10" Background="#60B721">
-                            <Grid Margin="15">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="1.5*" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Foreground="White"
-                                    Text="商城积分" />
-                                <TextBlock
-                                    Grid.Row="1"
-                                    FontSize="26"
-                                    Foreground="White"
-                                    Text="656,683" />
-                                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
-                                    <TextBlock
-                                        HorizontalAlignment="Right"
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="收益" />
-                                    <TextBlock
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="+0.8%" />
-                                </StackPanel>
-
-                                <StackPanel
-                                    Grid.Row="2"
-                                    VerticalAlignment="Top"
-                                    Orientation="Horizontal">
-                                    <TextBlock
-                                        Margin="0,0,15,0"
-                                        Foreground="White"
-                                        Text="提现" />
-                                    <TextBlock Foreground="White" Text="充值" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                        <Border Margin="10" Background="#FFA000">
-                            <Grid Margin="15">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="1.5*" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Foreground="White"
-                                    Text="理财积分" />
-                                <TextBlock
-                                    Grid.Row="1"
-                                    FontSize="26"
-                                    Foreground="White"
-                                    Text="37,215" />
-                                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
-                                    <TextBlock
-                                        HorizontalAlignment="Right"
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="收益" />
-                                    <TextBlock
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="+0.8%" />
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <TextBlock
-                                        Margin="0,0,15,0"
-                                        Foreground="White"
-                                        Text="提现" />
-                                    <TextBlock Foreground="White" Text="充值" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                        <Border Margin="10" Background="#30B8C4">
-                            <Grid Margin="15">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="1.5*" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Foreground="White"
-                                    Text="激活码" />
-                                <TextBlock
-                                    Grid.Row="1"
-                                    FontSize="26"
-                                    Foreground="White"
-                                    Text="49,201" />
-                                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
-                                    <TextBlock
-                                        HorizontalAlignment="Right"
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="收益" />
-                                    <TextBlock
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="+0.8%" />
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <TextBlock
-                                        Margin="0,0,15,0"
-                                        Foreground="White"
-                                        Text="提现" />
-                                    <TextBlock Foreground="White" Text="充值" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
-                        <Border Margin="10" Background="#E87A6C">
-                            <Grid Margin="15">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition Height="1.5*" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Foreground="White"
-                                    Text="现金积分" />
-                                <TextBlock
-                                    Grid.Row="1"
-                                    FontSize="26"
-                                    Foreground="White"
-                                    Text="49,201" />
-                                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
-                                    <TextBlock
-                                        HorizontalAlignment="Right"
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="收益" />
-                                    <TextBlock
-                                        Foreground="White"
-                                        Opacity="0.7"
-                                        Text="+0.8%" />
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <TextBlock
-                                        Margin="0,0,15,0"
-                                        Foreground="White"
-                                        Text="提现" />
-                                    <TextBlock Foreground="White" Text="充值" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>-->
                     </UniformGrid>
 
                     <!--  中间主体下方左侧  -->
@@ -550,7 +401,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!--  个人资料  -->
-                                <Grid Margin="10">
+                                <Grid Margin="10" DataContext="{Binding UserList}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="1.4*" />
@@ -570,7 +421,7 @@
                                                 Height="60"
                                                 CornerRadius="30">
                                                 <Border.Background>
-                                                    <ImageBrush ImageSource="./Images/logo.png" />
+                                                    <ImageBrush ImageSource="{Binding Photo}" />
                                                 </Border.Background>
                                             </Border>
                                             <TextBlock
@@ -578,7 +429,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="14"
                                                 Foreground="#787878"
-                                                Text="傲慢与偏见" />
+                                                Text="{Binding Nick}" />
                                         </StackPanel>
                                         <Button
                                             Width="80"
@@ -594,23 +445,26 @@
                                         Grid.Row="2"
                                         Columns="2"
                                         Rows="2">
-                                        <TextBlock Text="手机号：13812345678" />
-                                        <TextBlock Text="用户姓名：她比亚索还要浪" />
-                                        <TextBlock Text="用户名：luchong" />
+                                        <TextBlock Text="{Binding Phone, StringFormat=手机号：{0:C}}" />
+                                        <TextBlock Text="{Binding Name, StringFormat=用户姓名：{0:C}}" />
+                                        <TextBlock Text="{Binding UserName, StringFormat=用户名：{0:C}}" />
                                     </UniformGrid>
 
                                     <DockPanel Grid.Row="3">
                                         <Label
+                                            x:Name="urlText"
                                             Height="35"
                                             Padding="8"
                                             Background="#FFF4F4F4"
-                                            Content="https://www.cnblogs.com/chonglu/"
+                                            Content="{Binding Url}"
                                             FontSize="14"
                                             Foreground="#787878" />
                                         <Button
                                             Height="35"
                                             HorizontalAlignment="Right"
                                             Background="#5EB721"
+                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.PromotionUrlCmd}"
+                                            CommandParameter="{Binding ElementName=urlText, Path=Content}"
                                             Content="推广链接"
                                             Foreground="White"
                                             Style="{StaticResource buttonDefaultStyle}" />
@@ -635,20 +489,45 @@
                                         Foreground="#787878"
                                         Text="推荐用户" />
 
-                                    <ListBox Grid.Row="1">
+                                    <ListBox Grid.Row="1" ItemsSource="{Binding UserList}">
                                         <ListBox.Style>
                                             <Style TargetType="{x:Type ListBox}">
                                                 <Setter Property="BorderThickness" Value="0" />
                                             </Style>
                                         </ListBox.Style>
-                                        <ListBox.ItemTemplate>
+                                        <!--<ListBoxItem Style="{StaticResource listBoxItemStyle}" />
+                                        <ListBoxItem Style="{StaticResource listBoxItemStyle}" />-->
+                                        <!--<ListBoxItem IsSelected="True" Style="{StaticResource listBoxItemStyle}" />-->
+                                        <!--<ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <ListBoxItem Style="{StaticResource listBoxItemStyle}" />
+                                                <ListBoxItem>
+                                                    <Border Name="border" Padding="0,10">
+                                                        <UniformGrid Columns="4">
+                                                            <Border
+                                                                Width="50"
+                                                                Height="50"
+                                                                CornerRadius="25">
+                                                                <Border.Background>
+                                                                    <ImageBrush ImageSource="{Binding Photo}" />
+                                                                </Border.Background>
+                                                            </Border>
+                                                            <TextBlock
+                                                                Name="nick"
+                                                                VerticalAlignment="Center"
+                                                                Text="{Binding Nick}" />
+                                                            <TextBlock
+                                                                Name="timeText"
+                                                                VerticalAlignment="Center"
+                                                                Text="{Binding LastOnlineTime, StringFormat={}{0:HH:mm}}" />
+                                                            <TextBlock
+                                                                Name="next"
+                                                                VerticalAlignment="Center"
+                                                                Text="→" />
+                                                        </UniformGrid>
+                                                    </Border>
+                                                </ListBoxItem>
                                             </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                        <ListBoxItem Style="{StaticResource listBoxItemStyle}" />
-                                        <ListBoxItem Style="{StaticResource listBoxItemStyle}" />
-                                        <ListBoxItem IsSelected="True" Style="{StaticResource listBoxItemStyle}" />
+                                        </ListBox.ItemTemplate>-->
                                     </ListBox>
                                 </Grid>
                             </Grid>
@@ -670,90 +549,48 @@
                                     Foreground="#787878"
                                     Text="消费记录" />
 
-                                <UniformGrid Grid.Row="1" Columns="4">
-                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock
-                                                FontSize="25"
-                                                FontWeight="Bold"
-                                                Foreground="#FF2D9CF3"
-                                                Text="-168" />
-                                            <TextBlock
-                                                Margin="5"
-                                                VerticalAlignment="Bottom"
-                                                Foreground="#787878"
-                                                Text="点商城积分" />
-                                        </StackPanel>
-                                        <TextBlock
-                                            Margin="10,0,10,15"
-                                            FontSize="16"
-                                            Foreground="#787878"
-                                            Text="07:10" />
-                                        <TextBlock Margin="10,0" Text="查看明细" />
-                                    </StackPanel>
-
-                                    <StackPanel VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock
-                                                FontSize="25"
-                                                FontWeight="Bold"
-                                                Foreground="#FF2D9CF3"
-                                                Text="-168" />
-                                            <TextBlock
-                                                Margin="5"
-                                                VerticalAlignment="Bottom"
-                                                Foreground="#787878"
-                                                Text="点商城积分" />
-                                        </StackPanel>
-                                        <TextBlock
-                                            Margin="10,0,10,15"
-                                            FontSize="16"
-                                            Foreground="#787878"
-                                            Text="07:10" />
-                                        <TextBlock Margin="10,0" Text="查看明细" />
-                                    </StackPanel>
-
-                                    <StackPanel VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock
-                                                FontSize="25"
-                                                FontWeight="Bold"
-                                                Foreground="#FF2D9CF3"
-                                                Text="-168" />
-                                            <TextBlock
-                                                Margin="5"
-                                                VerticalAlignment="Bottom"
-                                                Foreground="#787878"
-                                                Text="点商城积分" />
-                                        </StackPanel>
-                                        <TextBlock
-                                            Margin="10,0,10,15"
-                                            FontSize="16"
-                                            Foreground="#787878"
-                                            Text="07:10" />
-                                        <TextBlock Margin="10,0" Text="查看明细" />
-                                    </StackPanel>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock
-                                                FontSize="25"
-                                                FontWeight="Bold"
-                                                Foreground="#FF2D9CF3"
-                                                Text="-168" />
-                                            <TextBlock
-                                                Margin="5"
-                                                VerticalAlignment="Bottom"
-                                                Foreground="#787878"
-                                                Text="点商城积分" />
-                                        </StackPanel>
-                                        <TextBlock
-                                            Margin="10,0,10,15"
-                                            FontSize="16"
-                                            Foreground="#787878"
-                                            Text="07:10" />
-                                        <TextBlock Margin="10,0" Text="查看明细" />
-                                    </StackPanel>
-                                </UniformGrid>
+                                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                    <ListView
+                                        Width="auto"
+                                        BorderThickness="0"
+                                        ItemsSource="{Binding ConsumeRecordList}">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <StackPanel VerticalAlignment="Center">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock
+                                                                        FontSize="25"
+                                                                        FontWeight="Bold"
+                                                                        Foreground="#FF2D9CF3"
+                                                                        Text="{Binding ConsumeCredits, StringFormat=-{0}}" />
+                                                                    <TextBlock
+                                                                        Margin="5"
+                                                                        VerticalAlignment="Bottom"
+                                                                        Foreground="#787878"
+                                                                        Text="点商城积分" />
+                                                                </StackPanel>
+                                                                <TextBlock
+                                                                    Margin="10,0,10,15"
+                                                                    FontSize="16"
+                                                                    Foreground="#787878"
+                                                                    Text="{Binding ConsumeTime, StringFormat={}{0:yyyy-MM-dd HH:mm}}" />
+                                                                <TextBlock Margin="10,0" Text="查看明细" />
+                                                            </StackPanel>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Columns="4" />
+                                            </ItemsPanelTemplate>
+                                        </ListView.ItemsPanel>
+                                    </ListView>
+                                </StackPanel>
                             </Grid>
                         </Border>
                     </Grid>

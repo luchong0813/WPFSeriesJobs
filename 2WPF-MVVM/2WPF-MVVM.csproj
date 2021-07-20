@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ConsumeRecord.cs" />
+    <Compile Include="Model\Earning.cs" />
+    <Compile Include="Model\MenuItem.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
