@@ -37,6 +37,7 @@
         <Style x:Key="iconTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="./Fonts/#iconfont" />
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="5" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
@@ -44,51 +45,37 @@
         <Style x:Key="listBoxItemStyle" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <!--<DataTemplate>
-                        <Border Name="border" Padding="0,10">
-                            <UniformGrid Columns="4">
-                                <Border
-                                    Width="50"
-                                    Height="50"
-                                    CornerRadius="25">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="./Images/logo.png" />
-                                    </Border.Background>
-                                </Border>
-                                <TextBlock
-                                    Name="nick"
-                                    VerticalAlignment="Center"
-                                    Text="傲慢与偏见" />
-                                <TextBlock
-                                    Name="timeText"
-                                    VerticalAlignment="Center"
-                                    Text="07：10" />
-                                <TextBlock
-                                    Name="next"
-                                    VerticalAlignment="Center"
-                                    Text="→" />
-                            </UniformGrid>
-                        </Border>
-                    </DataTemplate>-->
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
                         <Border Name="border" Padding="0,10">
                             <UniformGrid Columns="4">
-                                <Border
+                                <!--
+                                    涉及到绑定时最好还是不要使用Border，在这个容器里，
+                                    它找不到父级listbox的上下文，绑定就会失败，需要手动绑定到父级的上下文
+                                -->
+                                <!--<Border
                                     Width="50"
                                     Height="50"
                                     CornerRadius="25">
                                     <Border.Background>
-                                        <ImageBrush ImageSource="./Images/logo.png" />
+                                        <ImageBrush ImageSource="{Binding Profile}" />
                                     </Border.Background>
-                                </Border>
+                                </Border>-->
+                                <Image Width="50" Source="{Binding Profile}">
+                                    <Image.Clip>
+                                        <EllipseGeometry
+                                            Center="25 25"
+                                            RadiusX="25"
+                                            RadiusY="25" />
+                                    </Image.Clip>
+                                </Image>
                                 <TextBlock
                                     Name="nick"
                                     VerticalAlignment="Center"
-                                    Text="傲慢与偏见" />
+                                    Text="{Binding Nick}" />
                                 <TextBlock
                                     Name="timeText"
                                     VerticalAlignment="Center"
-                                    Text="07：10" />
+                                    Text="{Binding LastOnlineTime, StringFormat={}{0:HH:mm}}" />
                                 <TextBlock
                                     Name="next"
                                     VerticalAlignment="Center"
@@ -138,8 +125,7 @@
                     Foreground="#FFEC788F"
                     Text="傲慢与偏见" />
 
-
-
+                <!--  顶部菜单按钮  -->
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <ItemsControl ItemsSource="{Binding MenuItems}">
                         <ItemsControl.ItemTemplate>
@@ -182,8 +168,6 @@
                         <Button Content="退出" Style="{StaticResource buttonDefaultStyle}" />
                     </StackPanel>
                 </StackPanel>
-
-
 
             </DockPanel>
 
@@ -421,7 +405,7 @@
                                                 Height="60"
                                                 CornerRadius="30">
                                                 <Border.Background>
-                                                    <ImageBrush ImageSource="{Binding Photo}" />
+                                                    <ImageBrush ImageSource="{Binding Profile}" />
                                                 </Border.Background>
                                             </Border>
                                             <TextBlock
@@ -450,6 +434,7 @@
                                         <TextBlock Text="{Binding UserName, StringFormat=用户名：{0:C}}" />
                                     </UniformGrid>
 
+
                                     <DockPanel Grid.Row="3">
                                         <Label
                                             x:Name="urlText"
@@ -460,6 +445,7 @@
                                             FontSize="14"
                                             Foreground="#787878" />
                                         <Button
+                                            Width="80"
                                             Height="35"
                                             HorizontalAlignment="Right"
                                             Background="#5EB721"
@@ -489,50 +475,25 @@
                                         Foreground="#787878"
                                         Text="推荐用户" />
 
-                                    <ListBox Grid.Row="1" ItemsSource="{Binding UserList}">
+                                    <ListBox
+                                        Grid.Row="1"
+                                        ItemContainerStyle="{StaticResource listBoxItemStyle}"
+                                        ItemsSource="{Binding UserList}"
+                                        SelectedItem="{Binding SelectedUser}">
                                         <ListBox.Style>
                                             <Style TargetType="{x:Type ListBox}">
                                                 <Setter Property="BorderThickness" Value="0" />
                                             </Style>
                                         </ListBox.Style>
                                         <!--<ListBoxItem Style="{StaticResource listBoxItemStyle}" />
-                                        <ListBoxItem Style="{StaticResource listBoxItemStyle}" />-->
-                                        <!--<ListBoxItem IsSelected="True" Style="{StaticResource listBoxItemStyle}" />-->
-                                        <!--<ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <ListBoxItem>
-                                                    <Border Name="border" Padding="0,10">
-                                                        <UniformGrid Columns="4">
-                                                            <Border
-                                                                Width="50"
-                                                                Height="50"
-                                                                CornerRadius="25">
-                                                                <Border.Background>
-                                                                    <ImageBrush ImageSource="{Binding Photo}" />
-                                                                </Border.Background>
-                                                            </Border>
-                                                            <TextBlock
-                                                                Name="nick"
-                                                                VerticalAlignment="Center"
-                                                                Text="{Binding Nick}" />
-                                                            <TextBlock
-                                                                Name="timeText"
-                                                                VerticalAlignment="Center"
-                                                                Text="{Binding LastOnlineTime, StringFormat={}{0:HH:mm}}" />
-                                                            <TextBlock
-                                                                Name="next"
-                                                                VerticalAlignment="Center"
-                                                                Text="→" />
-                                                        </UniformGrid>
-                                                    </Border>
-                                                </ListBoxItem>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>-->
+                                        <ListBoxItem Style="{StaticResource listBoxItemStyle}" />
+                                        <ListBoxItem IsSelected="True" Style="{StaticResource listBoxItemStyle}" />-->
                                     </ListBox>
                                 </Grid>
                             </Grid>
                         </Border>
 
+                        <!--  最下方右侧积分消费记录  -->
                         <Border
                             Grid.Row="1"
                             Margin="10"

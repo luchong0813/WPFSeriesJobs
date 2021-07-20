@@ -17,6 +17,7 @@ namespace _2WPF_MVVM.ViewModel
         public string[] backcolor = new string[] { "#219AFD", "#60B721", "#FFA000", "#30B8C4", "#E87A6C" };
         public MainViewModel()
         {
+            //MockData...
             MenuItems = new ObservableCollection<MenuItem>()
             {
                 new MenuItem{ Icon="\ue720",Name="用户"},
@@ -31,9 +32,9 @@ namespace _2WPF_MVVM.ViewModel
             //省事..把个人资料和推荐用户放一起了
             UserList = new ObservableCollection<User>()
             {
-                new User{ Nick="傲慢与偏见",Name="她比亚索还要浪",Phone="13812345678",UserName="luchong",Url="https://www.cnblogs.com/chonglu/",Photo="./Images/logo.png",LastOnlineTime=DateTime.Now},
-                new User{ Nick="张三",Photo="./Images/logo.png",LastOnlineTime=DateTime.Now},
-                new User{ Nick="李四",Photo="./Images/logo.png",LastOnlineTime=DateTime.Now}
+                new User{ Nick="傲慢与偏见",Name="她比亚索还要浪",Phone="13812345678",UserName="luchong",Url="https://www.cnblogs.com/chonglu/",Profile="./Images/logo.png",LastOnlineTime=DateTime.Now},
+                new User{ Nick="张三", Name="她比盲僧还要瞎",Profile="./Images/logo.png",LastOnlineTime=DateTime.Now},
+                new User{ Nick="李四",Name="她比EZ还要帅", Profile="./Images/logo.png",LastOnlineTime=DateTime.Now}
             };
 
             ConsumeRecordList = new ObservableCollection<ConsumeRecord>()
@@ -54,14 +55,31 @@ namespace _2WPF_MVVM.ViewModel
         public ObservableCollection<Earning> Earnings { get; set; }
         public ObservableCollection<User> UserList { get; set; }
         public ObservableCollection<ConsumeRecord> ConsumeRecordList { get; set; }
+        private User selectedUser;
+
+        public User SelectedUser
+        {
+            get
+            {
+                if (selectedUser != null)
+                {
+                    MessageBox.Show($"用户昵称：{selectedUser.Nick}\r\n用户姓名：{selectedUser.Name}\r\n最后在线时间：{selectedUser.LastOnlineTime}");
+                }
+                return selectedUser;
+            }
+            set { selectedUser = value; }
+        }
+
         #endregion
 
         #region Command
         public RelayCommand<string> MenuItemCmd { get; set; }
         public RelayCommand<string> PromotionUrlCmd { get; set; }
+        public RelayCommand<string> ReferrerCmd { get; set; }
         #endregion
 
         #region Method
+
         private async void LoadEarnigs()
         {
             await Task.Run(() =>

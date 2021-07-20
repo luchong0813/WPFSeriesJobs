@@ -1,4 +1,5 @@
-﻿using _2WPF_MVVM.ViewModel;
+﻿using _2WPF_MVVM.Model;
+using _2WPF_MVVM.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -35,5 +36,6 @@ namespace _2WPF_MVVM
         {
             MessageBox.Show(content);
         }
+
     }
 }

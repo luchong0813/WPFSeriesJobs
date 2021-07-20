@@ -10,7 +10,7 @@ namespace _2WPF_MVVM.Model
     {
         public string Nick { get; set; }
         public string Name { get; set; }
-        public string Photo { get; set; }
+        public string Profile { get; set; }
         public string Phone { get; set; }
         public string UserName { get; set; }
         public string Url { get; set; }
